@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
+import Link from "next/link";
 
 interface FormPickerProps {
   id: string;
@@ -24,7 +25,6 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        throw new Error("wrong");
         const result = await unsplash.photos.getRandom({
           collectionIds: ["317099"],
           count: 9,
@@ -78,6 +78,13 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               className="object-cover rounded-sm"
               src={image.urls.thumb}
             />
+            <Link
+              href={image.links.html}
+              target="_blank"
+              className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] text-white hover:underline p-1 bg-black/50 truncate"
+            >
+              {image.user.name}
+            </Link>
           </div>
         ))}
       </div>
