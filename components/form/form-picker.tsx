@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { defaultImages } from "@/constants/images";
 import { unsplash } from "@/lib/unspalsh";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
 import Link from "next/link";
+import { FormErrors } from "./form-errors";
 
 interface FormPickerProps {
   id: string;
@@ -78,6 +79,12 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               className="object-cover rounded-sm"
               src={image.urls.thumb}
             />
+            {selectedImageId === image.id && (
+              <div className="absolute inset-y-0 h-full w-full bg-black/40 flex items-center justify-center">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+            )}
+
             <Link
               href={image.links.html}
               target="_blank"
@@ -88,6 +95,8 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
           </div>
         ))}
       </div>
+
+      <FormErrors id="image" errors={errors} />
     </div>
   );
 };
