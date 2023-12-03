@@ -1,10 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { defaultImages } from "@/constants/images";
 import { unsplash } from "@/lib/unspalsh";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 interface FormPickerProps {
@@ -15,13 +16,15 @@ interface FormPickerProps {
 export const FormPicker = ({ id, errors }: FormPickerProps) => {
   const { pending } = useFormStatus();
 
-  const [images, setImages] = useState<Array<Record<string, any>>>([]);
+  const [images, setImages] =
+    useState<Array<Record<string, any>>>(defaultImages);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImageId, setSelectedImageId] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
+        throw new Error("wrong");
         const result = await unsplash.photos.getRandom({
           collectionIds: ["317099"],
           count: 9,
@@ -37,6 +40,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
       } catch (error) {
         console.log(error);
         setImages([]);
+        setImages(defaultImages);
       } finally {
         setIsLoading(false);
       }
