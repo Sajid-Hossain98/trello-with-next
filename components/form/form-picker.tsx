@@ -73,6 +73,15 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               pending && "opacity-50 hover:opacity-50 cursor-auto"
             )}
           >
+            <input
+              type="radio"
+              name={id}
+              id={id}
+              className="hidden"
+              checked={selectedImageId === image.id}
+              disabled={pending}
+              value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
+            />
             <Image
               fill
               alt="unsplash image"
