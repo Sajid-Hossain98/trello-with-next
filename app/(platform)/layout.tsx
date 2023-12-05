@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 
 const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="h-full">
       <ClerkProvider>
         <Toaster />
         {children}
