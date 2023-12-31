@@ -10,7 +10,9 @@ const ActivityPage = () => {
 
       <Separator className="my-2" />
 
-      <ActivityList />
+      <Suspense fallback={<ActivityList.Skeleton />}>
+        <ActivityList />
+      </Suspense>
     </div>
   );
 };
